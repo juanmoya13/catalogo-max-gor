@@ -5,7 +5,7 @@ export async function middleware(request: NextRequest) {
   const isAccessingAdmin = request.nextUrl.pathname.startsWith("/admin");
   const isAccessingLogin = request.nextUrl.pathname === "/login";
   const hasSupabaseConfig = Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY,
   );
 
   let response = NextResponse.next({
@@ -23,8 +23,8 @@ export async function middleware(request: NextRequest) {
   }
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!,
     {
       cookies: {
         getAll() {
