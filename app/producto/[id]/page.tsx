@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { AddToCartButton } from "@/components/add-to-cart-button";
 import { getPublicProductById } from "@/lib/catalog/public";
 
 function formatCurrency(value: number | null) {
@@ -113,11 +114,16 @@ export default async function ProductDetailPage({
             )}
 
             <div className="mt-8 flex flex-col gap-3">
+              <AddToCartButton
+                product={product}
+                label={product.precio === null ? "Agregar sin precio al carrito" : "Agregar al carrito"}
+                className="inline-flex items-center justify-center rounded-xl bg-orange-500 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-orange-600"
+              />
               <a
                 href={`https://wa.me/?text=${encodeURIComponent(`Hola, me interesa ${product.nombre}. ¿Podés consultarme más información?`)}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl bg-orange-500 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-orange-600"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-950 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-slate-200 transition hover:border-orange-500 hover:text-white"
               >
                 Consultar por WhatsApp
               </a>

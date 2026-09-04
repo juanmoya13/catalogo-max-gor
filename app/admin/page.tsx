@@ -239,7 +239,7 @@ export default async function AdminPage({
                               )}
                             </div>
 
-                            <form action={updateProductAction} encType="multipart/form-data" className="space-y-4">
+                            <form action={updateProductAction} className="space-y-4">
                               <input type="hidden" name="producto_id" value={product.id} />
                               <div className="grid gap-4 md:grid-cols-2">
                                 <div>

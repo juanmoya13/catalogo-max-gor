@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { AddToCartButton } from "@/components/add-to-cart-button";
 import {
   listPublicFilters,
   listPublicProducts,
@@ -301,12 +302,19 @@ export default async function HomePage({
                             )}
                           </div>
 
-                          <Link
-                            href={`/producto/${product.id}`}
-                            className="mt-6 inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-orange-500 hover:text-orange-300"
-                          >
-                            Ver detalle
-                          </Link>
+                          <div className="mt-6 flex flex-col gap-3">
+                            <AddToCartButton
+                              product={product}
+                              label="Agregar al carrito"
+                              className="inline-flex items-center justify-center rounded-xl bg-orange-500 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-orange-600"
+                            />
+                            <Link
+                              href={`/producto/${product.id}`}
+                              className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-orange-500 hover:text-orange-300"
+                            >
+                              Ver detalle
+                            </Link>
+                          </div>
                         </div>
                       </article>
                     );
