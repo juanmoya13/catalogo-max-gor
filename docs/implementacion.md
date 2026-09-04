@@ -603,6 +603,7 @@ El documento plantea, por ejemplo, un escenario donde el usuario busca "Remera",
 * [ ] Flujo completo comprador → WhatsApp OK.
 * [ ] Flujo completo administrador → catálogo OK.
 * [ ] Validación final del MVP realizada.
+* [ ] Eliminacion de los archivos que se realizaron para pruebas y que no afectan a la funcionalidad de la app.
 
 **Salida del incremento:**
 

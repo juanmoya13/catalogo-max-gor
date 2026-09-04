@@ -2,12 +2,14 @@
   "name": "catalogo",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "test": "node --test"
+    "lint": "eslint .",
+    "test": "node --test",
+    "ci:check": "npm run lint && npm test && npm run build"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.5",

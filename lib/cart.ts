@@ -63,6 +63,57 @@ export function ensureValidCartQuantity(value: number): number {
   return Math.max(1, Math.floor(value));
 }
 
+export function reconcileCartItemsWithCatalog(
+  items: Array<{
+    productId?: string;
+    productName?: string;
+    imageUrl?: string;
+    price?: number | null;
+    selectedFilters?: Array<
+      | { id?: string; value?: string; [key: string]: unknown }
+      | Record<string, unknown>
+      | null
+      | undefined
+    >;
+    quantity?: number;
+  }>,
+  catalog: Array<{
+    id: string;
+    nombre?: string;
+    name?: string;
+    precio?: number | null;
+    price?: number | null;
+  }>,
+): CartItem[] {
+  const catalogById = new Map(
+    catalog.map((product) => [String(product.id).trim(), product]),
+  );
+
+  return items.flatMap((item) => {
+    const productId = String(item.productId ?? "").trim();
+    const product = catalogById.get(productId);
+
+    if (!product) {
+      return [];
+    }
+
+    const selectedFilters = normalizeCartFilterSelection(item.selectedFilters ?? []);
+    const quantity = ensureValidCartQuantity(Number(item.quantity ?? 1));
+    const price = product.precio ?? product.price ?? null;
+    const productName = String(product.nombre ?? product.name ?? item.productName ?? "Producto").trim() || "Producto";
+
+    return [{
+      id: createCartItemKey(productId, selectedFilters),
+      productId,
+      productName,
+      imageUrl: String(item.imageUrl ?? ""),
+      price: price === null || price === undefined ? null : Number(price),
+      selectedFilters,
+      quantity,
+    }];
+  });
+}
+
 export function calculateCartTotals(items: CartItem[]) {
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => {
@@ -133,8 +184,9 @@ export function buildWhatsAppMessage(items: CartItem[]): string {
 
 export function buildWhatsAppLink(phoneNumber: string, message: string): string {
   const normalizedPhone = String(phoneNumber ?? "").trim();
+  const baseUrl = normalizedPhone ? `https://wa.me/${normalizedPhone}` : "https://wa.me/";
 
-  return `https://wa.me/${normalizedPhone}?text=${encodeURIComponent(message)}`;
+  return `${baseUrl}?text=${encodeURIComponent(message)}`;
 }
 
 export function createCartItemFromProduct(
