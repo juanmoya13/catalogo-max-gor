@@ -235,7 +235,7 @@ export default async function HomePage({
               <div className="rounded-3xl border border-dashed border-slate-700 bg-slate-900/40 p-12 text-center">
                 <p className="text-lg font-bold uppercase tracking-[0.18em] text-orange-500">Catálogo sin datos</p>
                 <p className="mt-3 text-slate-300">
-                  Configura NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY para ver el catálogo real.
+                  Configura SUPABASE_URL y SUPABASE_ANON_KEY para ver el catálogo real.
                 </p>
               </div>
             ) : products.length === 0 ? (
