@@ -110,7 +110,7 @@ export default async function HomePage({
                 <span className="block text-orange-500">el día a día</span>
               </h1>
               <p className="mt-5 max-w-xl text-lg text-slate-300">
-                Descubrí prendas con estilo sobrio, materiales de calidad y una compra directa pensada para WhatsApp.
+                Conectá con lo que te gusta. Tu dosis diaria de tecnología, coleccionables y accesorios. Elegí lo que quieras y completá tu compra de forma directa por WhatsApp.
               </p>
             </div>
 
