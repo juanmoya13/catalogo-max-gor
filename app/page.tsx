@@ -106,11 +106,11 @@ export default async function HomePage({
           <div className="mt-6 grid gap-10 md:grid-cols-[1.15fr_0.85fr] md:items-end">
             <div>
               <h1 className="text-6xl font-black uppercase tracking-tighter leading-none text-white md:text-8xl">
-                Ropa para
-                <span className="block text-orange-500">el día a día</span>
+                Conectá con lo que 
+                <span className="block text-orange-500">te gusta</span>
               </h1>
               <p className="mt-5 max-w-xl text-lg text-slate-300">
-                Conectá con lo que te gusta. Tu dosis diaria de tecnología, coleccionables y accesorios. Elegí lo que quieras y completá tu compra de forma directa por WhatsApp.
+                Tu dosis diaria de tecnología, coleccionables y accesorios. Elegí lo que quieras y completá tu compra de forma directa por WhatsApp.
               </p>
             </div>
 
