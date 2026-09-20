@@ -18,6 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Catálogo MVP",
   description: "Base técnica del catálogo con Supabase, Next.js y seguridad administrativa.",
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/icon.png",
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
