@@ -45,7 +45,7 @@ export default async function HomePage({
         <span>Consulta inmediata</span>
       </header>
 
-      <nav className="sticky top-0 z-1000 w-full bg-black flex justify-between items-center border-b border-gray-800 px-4 py-4 md:px-8">
+      <nav className="sticky top-0 z-50 w-full bg-black flex justify-between items-center border-b border-gray-800 px-4 py-4 md:px-8">
         <Link href="/" className="text-sm font-black uppercase tracking-[0.28em] text-orange-500">
           <Image src="/icon.png" alt="Logo" width={32} height={32} className="inline-block mr-2" />
           MaxGor

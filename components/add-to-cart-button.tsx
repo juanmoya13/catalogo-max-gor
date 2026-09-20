@@ -2,6 +2,7 @@
 
 import { useCart } from "@/components/cart-provider";
 import { createCartItemFromProduct } from "@/lib/cart";
+import { toast } from 'sonner';
 
 export function AddToCartButton({
   product,
@@ -27,7 +28,10 @@ export function AddToCartButton({
       type="button"
       onClick={() => {
         addItem(createCartItemFromProduct(product, 1));
-        openCart();
+        toast.success(`¡Se agregó ${product.nombre} al carrito!`, {
+          description: "Puedes ver tus productos en la esquina inferior derecha.",
+          duration: 3000, // 3 segundos
+        });
       }}
       className={className}
     >

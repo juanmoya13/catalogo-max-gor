@@ -228,7 +228,7 @@ function CartDrawer() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm">
+        <div className="fixed inset-0 z-60 bg-slate-950/70 backdrop-blur-sm">
           <div className="ml-auto h-full w-full max-w-md border-l border-slate-800 bg-slate-950 p-5 shadow-2xl shadow-black/30">
             <div className="flex items-center justify-between border-b border-slate-800 pb-4">
               <div>
