@@ -248,7 +248,7 @@ El usuario debe poder:
 * acceder sin autenticarse;
 * visualizar productos;
 * recibir inicialmente una cantidad limitada;
-* pulsar **Cargar más productos**.
+* cargar automáticamente más productos al acercarse al final de la grilla mediante scroll infinito.
 
 #### Búsqueda
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { AddToCartButton } from "@/components/add-to-cart-button";
+import { InfiniteProductGrid } from "@/components/infinite-product-grid";
 import {
   listPublicFilters,
   listPublicProducts,
@@ -13,49 +13,6 @@ import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 const PAGE_SIZE = 8;
 
-function formatCurrency(value: number | null) {
-  if (value === null || value === undefined) {
-    return "A consultar";
-  }
-
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    maximumFractionDigits: 0,
-  }).format(value);
-}
-
-function buildCatalogHref({
-  search,
-  sort,
-  selectedValues,
-  pageOffset,
-}: {
-  search: string;
-  sort: string;
-  selectedValues: string[];
-  pageOffset: number;
-}) {
-  const params = new URLSearchParams();
-
-  if (search) {
-    params.set("search", search);
-  }
-
-  if (sort) {
-    params.set("sortBy", sort);
-  }
-
-  selectedValues.forEach((valueId) => params.append("filterValues", valueId));
-
-  if (pageOffset > 0) {
-    params.set("offset", String(pageOffset));
-  }
-
-  const queryString = params.toString();
-  return queryString ? `/?${queryString}` : "/";
-}
-
 export default async function HomePage({
   searchParams,
 }: {
@@ -66,21 +23,19 @@ export default async function HomePage({
   const search = normalizeSearchQuery(params.search);
   const selectedValues = normalizeFilterValueSelection(params.filterValues);
   const sortBy = normalizeSortBy(params.sortBy);
-  const offset = Math.max(Number(params.offset ?? 0), 0);
-
-  const [filters, allProducts] = await Promise.all([
+  const [filters, productsWithLookahead] = await Promise.all([
     listPublicFilters(),
     listPublicProducts({
       searchQuery: search,
       filterValues: selectedValues,
       sortBy,
-      limit: Number.MAX_SAFE_INTEGER,
+      limit: PAGE_SIZE + 1,
     }),
   ]);
 
-  const products = allProducts.slice(offset, offset + PAGE_SIZE);
-  const hasMore = offset + PAGE_SIZE < allProducts.length;
-  const productsLabel = allProducts.length === 1 ? "producto" : "productos";
+  const products = productsWithLookahead.slice(0, PAGE_SIZE);
+  const hasMore = productsWithLookahead.length > PAGE_SIZE;
+  const productsLabel = products.length === 1 ? "producto cargado" : "productos cargados";
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -98,7 +53,6 @@ export default async function HomePage({
       </nav>
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-4 md:px-8">
         <section className="pt-10 md:pt-14">
-          <div className="mt-6 grid gap-10 md:grid-cols-[1.15fr_0.85fr] md:items-end">
             <div>
               <h1 className="text-6xl font-black uppercase tracking-tighter leading-none text-white md:text-8xl">
                 Conectá con lo que 
@@ -108,7 +62,6 @@ export default async function HomePage({
                 Tu dosis diaria de tecnología, coleccionables y accesorios. Elegí lo que quieras y completá tu compra de forma directa por WhatsApp.
               </p>
             </div>
-          </div>
         </section>
 
         <section id="catalogo" className="mt-12 grid gap-8 xl:grid-cols-[320px_1fr]">
@@ -204,7 +157,7 @@ export default async function HomePage({
                 <h2 className="mt-2 text-3xl font-bold uppercase text-white">Colección</h2>
               </div>
               <p className="text-sm text-slate-300">
-                {allProducts.length} {productsLabel} disponibles
+                {products.length} {productsLabel}
               </p>
             </div>
 
@@ -221,98 +174,14 @@ export default async function HomePage({
                 <p className="mt-3 text-slate-300">Probá otra búsqueda o limpia los filtros aplicados.</p>
               </div>
             ) : (
-              <>
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {products.map((product) => {
-                    const image = product.fotografias[0]?.url_imagen;
-                    const primaryFilters = product.filtros.slice(0, 2);
-
-                    return (
-                      <article key={product.id} className="flex flex-col overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/50">
-                        <div className="relative flex aspect-[4/5] items-center justify-center overflow-hidden bg-slate-950">
-                          {image ? (
-                            <Image
-                              src={image}
-                              alt={product.nombre}
-                              fill
-                              unoptimized
-                              className="object-cover transition duration-300 hover:scale-105"
-                            />
-                          ) : (
-                            <div className="flex h-full w-full items-center justify-center text-sm font-medium text-slate-500">
-                              Sin imagen
-                            </div>
-                          )}
-                          <span className="absolute right-4 top-4 inline-flex rounded-full bg-orange-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
-                            Nuevo
-                          </span>
-                        </div>
-
-                        <div className="flex flex-1 flex-col p-5">
-                          <div className="flex items-start justify-between gap-4">
-                            <div>
-                              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-indigo-400">Colección</p>
-                              <h3 className="mt-2 text-xl font-bold uppercase text-white">{product.nombre}</h3>
-                            </div>
-                            <div className="text-right">
-                              <p className="text-white font-bold">{formatCurrency(product.precio)}</p>
-                            </div>
-                          </div>
-
-                          <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-400">
-                            {product.descripcion || "Sin descripción disponible."}
-                          </p>
-
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {primaryFilters.length > 0 ? (
-                              primaryFilters.map((filter) => (
-                                <span
-                                  key={`${product.id}-${filter.valor_filtro_id}`}
-                                  className="rounded-full border border-slate-700 bg-slate-950 px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-slate-200"
-                                >
-                                  {filter.valor}
-                                </span>
-                              ))
-                            ) : (
-                              <span className="text-[10px] uppercase tracking-[0.12em] text-slate-500">Sin filtros</span>
-                            )}
-                          </div>
-
-                          <div className="mt-6 flex flex-col gap-3">
-                            <AddToCartButton
-                              product={product}
-                              label="Agregar al carrito"
-                              className="inline-flex items-center justify-center rounded-xl bg-orange-500 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-orange-600"
-                            />
-                            <Link
-                              href={`/producto/${product.id}`}
-                              className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-orange-500 hover:text-orange-300"
-                            >
-                              Ver detalle
-                            </Link>
-                          </div>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-
-                {hasMore && (
-                  <div className="mt-8 flex justify-center">
-                    <Link
-                      href={buildCatalogHref({
-                        search,
-                        sort: sortBy,
-                        selectedValues,
-                        pageOffset: offset + PAGE_SIZE,
-                      })}
-                      className="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-8 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-orange-600"
-                    >
-                      Cargar más productos
-                    </Link>
-                  </div>
-                )}
-              </>
+              <InfiniteProductGrid
+                key={`${search}|${sortBy}|${selectedValues.join(",")}`}
+                initialProducts={products}
+                initialHasMore={hasMore}
+                search={search}
+                sort={sortBy}
+                selectedValues={selectedValues}
+              />
             )}
           </section>
         </section>
