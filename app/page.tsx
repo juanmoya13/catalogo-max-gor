@@ -90,19 +90,14 @@ export default async function HomePage({
         <span>Consulta inmediata</span>
       </header>
 
+      <nav className="sticky top-0 z-1000 w-full bg-black flex justify-between items-center border-b border-gray-800 px-4 py-4 md:px-8">
+        <Link href="/" className="text-sm font-black uppercase tracking-[0.28em] text-orange-500">
+          <Image src="/icon.png" alt="Logo" width={32} height={32} className="inline-block mr-2" />
+          MaxGor
+        </Link>
+      </nav>
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-4 md:px-8">
-        <nav className="flex justify-between items-center border-b border-gray-800 py-4">
-          <Link href="/" className="text-sm font-black uppercase tracking-[0.28em] text-orange-500">
-            Catálogo
-          </Link>
-          <div className="flex items-center gap-6 text-sm font-medium text-slate-300">
-            <Link href="/" className="transition hover:text-white">Inicio</Link>
-            <Link href="/admin" className="transition hover:text-white">Admin</Link>
-          </div>
-        </nav>
-
         <section className="pt-10 md:pt-14">
-          <p className="text-sm font-medium uppercase tracking-[0.28em] text-indigo-400">01 / La colección</p>
           <div className="mt-6 grid gap-10 md:grid-cols-[1.15fr_0.85fr] md:items-end">
             <div>
               <h1 className="text-6xl font-black uppercase tracking-tighter leading-none text-white md:text-8xl">
@@ -112,25 +107,6 @@ export default async function HomePage({
               <p className="mt-5 max-w-xl text-lg text-slate-300">
                 Tu dosis diaria de tecnología, coleccionables y accesorios. Elegí lo que quieras y completá tu compra de forma directa por WhatsApp.
               </p>
-            </div>
-
-            <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 shadow-2xl shadow-orange-500/10">
-              <p className="text-xs font-bold uppercase tracking-[0.26em] text-orange-500">Novedades</p>
-              <p className="mt-4 text-3xl font-black uppercase tracking-tight text-white">Apparel for the driven</p>
-              <div className="mt-6 flex gap-3">
-                <Link
-                  href="#catalogo"
-                  className="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-orange-600"
-                >
-                  Ver colección
-                </Link>
-                <Link
-                  href="/admin"
-                  className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-orange-500 hover:text-orange-300"
-                >
-                  Admin
-                </Link>
-              </div>
             </div>
           </div>
         </section>

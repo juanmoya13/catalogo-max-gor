@@ -132,10 +132,11 @@
 
 **Paleta de Colores y Fondos**
 
-* **Fondo principal:** Usa colores oscuros profundos, específicamente `bg-slate-950` o un azul medianoche personalizado (`bg-[#0a0f1c]`), para todo el cuerpo de la página.
-* **Color de acento primario (Naranja):** Utiliza `text-orange-500` y `bg-orange-500` para logotipos, el banner superior, botones de llamada a la acción, badges de "OFERTA" o "NUEVO" y palabras clave destacadas en los títulos.
-* **Color de acento secundario (Púrpura):** Aplica `text-indigo-400` o un tono similar para los pequeños textos descriptivos de sección, como "01 / LA COLECCIÓN" o "APPAREL FOR THE DRIVEN".
-* **Textos base:** Implementa `text-white` para los encabezados y los nombres de los productos, mientras usas `text-gray-400` para las descripciones secundarias y el color de las prendas.
+* **Fondo principal:** Usa negro profundo (`#030507`) o `bg-slate-950` para el cuerpo de la página.
+* **Color de acento primario (Azul neón):** Utiliza `text-orange-500` y `bg-orange-500` como alias de la marca para logotipos, banners, botones, badges y palabras clave destacadas. El tema global los renderiza como azul neón.
+* **Color de acento secundario (Azul claro):** Aplica `text-indigo-400` como alias de marca para textos descriptivos de sección y etiquetas auxiliares.
+* **Superficies:** Conserva niveles diferenciados con `bg-slate-900/70`, `bg-slate-900/50` y `bg-slate-950/50` para que las tarjetas y paneles se separen del fondo negro.
+* **Textos base:** Implementa `text-white` para encabezados y nombres de productos, y `text-gray-400` o `text-slate-300` para descripciones secundarias.
 
 **Tipografía**
 
@@ -152,7 +153,7 @@
 
 **Componentes Específicos**
 
-* **Botones principales:** Configura con `bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 flex items-center gap-2 transition-colors`.
+* **Botones principales:** Configura con `bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 px-8 flex items-center gap-2 transition-colors`.
 * **Filtros activos e inactivos:** Para el botón de filtro seleccionado (ej. "Todos"), usa `bg-orange-500 text-white px-4 py-1.5`. Para los inactivos, usa `text-gray-300 hover:text-white px-4 py-1.5`.
 * **Tarjetas de producto:** Crea contenedores con un fondo oscuro sutil (`bg-slate-900/50`) usando `flex flex-col relative aspect-[4/5]` para las imágenes.
 * **Badges flotantes:** Posiciona las etiquetas sobre las imágenes utilizando `absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 text-xs font-bold uppercase`.

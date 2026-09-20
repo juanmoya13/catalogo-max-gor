@@ -1,15 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  --background: #020817;
+  --background: #030507;
   --foreground: #f8fafc;
+  --brand-neon: #00c8ff;
+  --brand-neon-hover: #00a9dc;
+  --brand-neon-soft: #66dcff;
+  --surface: #0a1018;
+  --surface-raised: #101a25;
+  --border: #1a3548;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-orange-500: var(--brand-neon);
+  --color-orange-600: var(--brand-neon-hover);
+  --color-orange-400: var(--brand-neon-soft);
+  --color-orange-300: #9ae8ff;
+  --color-orange-200: #c9f4ff;
+  --color-indigo-400: var(--brand-neon-soft);
+  --color-slate-950: var(--background);
+  --color-slate-900: var(--surface);
+  --color-slate-800: var(--border);
+  --color-slate-700: #295066;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+.bg-orange-500 {
+  color: #001018;
+}
+
+.hover\:bg-orange-600:hover {
+  color: #001018;
 }
 
 html {
@@ -18,10 +42,10 @@ html {
 
 body {
   background:
-    radial-gradient(circle at top, rgba(249, 115, 22, 0.12), transparent 28%),
-    linear-gradient(180deg, #020817 0%, #020817 100%);
+    radial-gradient(circle at top, rgba(0, 200, 255, 0.12), transparent 28%),
+    linear-gradient(180deg, #030507 0%, #050a10 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
 }
 
 * {
