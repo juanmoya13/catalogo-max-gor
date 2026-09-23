@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
 import { AddToCartButton } from "@/components/add-to-cart-button";
+import BotonSeguirComprando from "@/components/back-to-previous-page-button";
 import { getPublicProductById } from "@/lib/catalog/public";
+import { DEFAULT_WHATSAPP_PHONE } from "@/lib/cart";
 
 function formatCurrency(value: number | null) {
   if (value === null || value === undefined) {
@@ -120,19 +121,16 @@ export default async function ProductDetailPage({
                 className="inline-flex items-center justify-center rounded-xl bg-orange-500 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-orange-600"
               />
               <a
-                href={`https://wa.me/?text=${encodeURIComponent(`Hola, me interesa ${product.nombre}. ¿Podés consultarme más información?`)}`}
+                href={`https://wa.me/${DEFAULT_WHATSAPP_PHONE}?text=${encodeURIComponent(`Hola, me interesa ${product.nombre}. Quisiera más información...`)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-950 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-slate-200 transition hover:border-orange-500 hover:text-white"
               >
                 Consultar por WhatsApp
               </a>
-              <Link
-                href="/"
+              <BotonSeguirComprando
                 className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-950 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-slate-200 transition hover:border-orange-500 hover:text-white"
-              >
-                Seguir comprando
-              </Link>
+              />
             </div>
           </aside>
         </div>

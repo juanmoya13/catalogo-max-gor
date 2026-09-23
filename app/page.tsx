@@ -76,7 +76,7 @@ export default async function HomePage({
                   id="search"
                   name="search"
                   defaultValue={search}
-                  placeholder="Ej: remera, campera"
+                  placeholder="Ej: funda, auriculares, cargador"
                   className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-white placeholder:text-slate-500 focus:border-orange-500 focus:outline-none"
                 />
               </div>

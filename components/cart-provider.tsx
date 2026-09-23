@@ -250,7 +250,7 @@ function CartDrawer() {
                 <p className="mt-3 text-sm text-slate-300">Agregá productos para armar tu pedido.</p>
               </div>
             ) : (
-              <div className="mt-5 space-y-4 overflow-y-auto pb-56">
+              <div className="h-[calc(100vh-250px)] overflow-y-auto pr-2 custom-scrollbar">
                 {items.map((item) => (
                   <div key={item.id} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-3">
                     <div className="flex gap-3">
