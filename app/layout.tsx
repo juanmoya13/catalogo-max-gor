@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: "/icon.png",
+  },
+  verification: {
+    google: "j5VZ9O4Frjhf_BIZqGlirc5I-GbTsVvkxx5ExuyXZ58"
   }
 };
 
