@@ -87,6 +87,16 @@ export default async function ProductDetailPage({
 
           <aside className="rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-indigo-400">Producto</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+                  {product.filtros.map((filter) => (
+                    <span
+                      key={`${filter.filtro_id}-${filter.valor_filtro_id}`}
+                      className="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-200"
+                    >
+                      {filter.valor}
+                    </span>
+                  ))}
+                </div>
             <h1 className="mt-3 text-4xl font-black uppercase tracking-tight text-white">{product.nombre}</h1>
 
             <div className="mt-5 flex items-center justify-between border-b border-slate-800 pb-4">
@@ -101,16 +111,7 @@ export default async function ProductDetailPage({
             {product.filtros.length > 0 && (
               <div className="mt-6">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Caracteristicas</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {product.filtros.map((filter) => (
-                    <span
-                      key={`${filter.filtro_id}-${filter.valor_filtro_id}`}
-                      className="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-200"
-                    >
-                      {filter.valor}
-                    </span>
-                  ))}
-                </div>
+                
               </div>
             )}
 

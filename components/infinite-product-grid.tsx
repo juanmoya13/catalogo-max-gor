@@ -253,17 +253,20 @@ export function InfiniteProductGrid({
                 <span className="absolute right-4 top-4 inline-flex rounded-full bg-orange-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">Nuevo</span>
               </div>
 
-              <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-5">
-                <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                  <h3 className="min-w-0 break-words text-base font-bold uppercase text-white sm:text-xl">{product.nombre}</h3>
-                  <p className="max-w-full break-words text-left font-bold text-white sm:text-right">{formatCurrency(product.precio)}</p>
-                </div>
-                <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-400">{product.descripcion || "Sin descripción disponible."}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
+              <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-2">
+                <div className="flex flex-wrap gap-2">
                   {primaryFilters.length > 0 ? primaryFilters.map((filter) => (
                     <span key={`${product.id}-${filter.valor_filtro_id}`} className="rounded-full border border-slate-700 bg-slate-950 px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-slate-200">{filter.valor}</span>
                   )) : <span className="text-[10px] uppercase tracking-[0.12em] text-slate-500">Sin filtros</span>}
                 </div>
+
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                  <h3 className="mt-2 min-w-0 break-words text-base font-bold uppercase text-white sm:text-xl">{product.nombre}</h3>
+                  <p className="mt-2 max-w-full break-words text-left font-bold text-white sm:text-right">{formatCurrency(product.precio)}</p>
+                </div>
+
+                <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-400">{product.descripcion || "Sin descripción disponible."}</p>
+                
                 <div className="mt-auto flex flex-col gap-3 pt-6">
                   <AddToCartButton product={product} label="Agregar al carrito" className="inline-flex min-h-11 w-full min-w-0 items-center justify-center whitespace-normal rounded-xl bg-orange-500 px-2 py-3 text-xs font-bold uppercase leading-tight tracking-[0.12em] text-white transition hover:bg-orange-600 sm:px-4 sm:text-sm" />
                   <Link
